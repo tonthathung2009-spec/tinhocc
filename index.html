@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1b1464" />
+  <title>Piano Journey — Learn. Play. Enjoy.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%B9%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="bg-notes" aria-hidden="true"></div>
+
+    <main>
+      <section id="screen-home" class="screen active" aria-label="Home">
+        <div class="home-hero">
+          <p class="brand-kicker">Beginner piano studio</p>
+          <h1 class="title">Piano Journey</h1>
+          <p class="subtitle">Learn. Play. Enjoy.</p>
+          <div class="home-actions">
+            <button class="btn btn-primary btn-xl" id="btn-free-play" type="button">
+              🎹 Free Play
+            </button>
+            <button class="btn btn-secondary btn-xl" id="btn-learn-song" type="button">
+              🎵 Learn a Song
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-free-play" class="screen" aria-label="Free Play" hidden>
+        <header class="topbar">
+          <button class="btn btn-ghost" id="free-play-home" type="button" aria-label="Back to home">← Home</button>
+          <h2 class="screen-heading">🎹 Free Play</h2>
+          <div id="volume-free" class="volume-slot"></div>
+        </header>
+        <p class="play-hint">Play anything you like!</p>
+        <p class="play-subhint">Use your mouse, touch, or keyboard.</p>
+        <p class="current-note" id="current-note" aria-live="polite">Current note: —</p>
+        <div class="piano-host" id="piano-host-free"></div>
+        <p class="keymap-legend">Computer keys: A W S E D F T G Y H U J K O L P ; ' [ Z X C V B N</p>
+      </section>
+
+      <section id="screen-songs" class="screen" aria-label="Song selection" hidden>
+        <header class="topbar">
+          <button class="btn btn-ghost" id="songs-home" type="button" aria-label="Back to home">← Home</button>
+          <h2 class="screen-heading">Choose a Song</h2>
+          <span class="topbar-spacer"></span>
+        </header>
+        <div class="song-grid" id="song-grid"></div>
+      </section>
+
+      <section id="screen-learn" class="screen" aria-label="Learn a song" hidden>
+        <header class="topbar">
+          <button class="btn btn-ghost" id="learn-exit" type="button" aria-label="Exit to song selection">← Exit</button>
+          <h2 class="screen-heading" id="learn-title">Song</h2>
+          <div id="volume-learn" class="volume-slot"></div>
+        </header>
+
+        <div class="learn-meta">
+          <div class="progress-block">
+            <p class="progress-label" id="progress-label">0 / 0 notes</p>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+          <div class="learn-actions">
+            <button class="btn btn-soft" id="btn-pause" type="button">Pause</button>
+            <button class="btn btn-soft" id="btn-restart" type="button">Restart</button>
+          </div>
+        </div>
+
+        <div class="next-note-panel">
+          <p class="next-kicker">Next note</p>
+          <p class="next-note-name" id="next-note-name">—</p>
+          <div class="upcoming" id="upcoming-notes" aria-label="Upcoming notes"></div>
+        </div>
+        <p class="feedback" id="learn-feedback" aria-live="polite"></p>
+        <div class="piano-host" id="piano-host-learn"></div>
+      </section>
+    </main>
+
+    <div id="pause-overlay" class="overlay" hidden>
+      <div class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+        <h2 id="pause-title">Paused</h2>
+        <p>Your progress is saved. Continue whenever you are ready.</p>
+        <button class="btn btn-primary" id="btn-resume" type="button">▶ Resume</button>
+      </div>
+    </div>
+
+    <div id="complete-overlay" class="overlay overlay-celebrate" hidden>
+      <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+      <div class="clap-layer" id="clap-layer" aria-hidden="true"></div>
+      <div class="overlay-card celebrate-card" role="dialog" aria-modal="true" aria-labelledby="complete-title">
+        <h2 id="complete-title">🎉 AMAZING! 🎉</h2>
+        <p id="complete-sub">You completed the song!</p>
+        <div class="complete-actions">
+          <button class="btn btn-primary" id="btn-play-again" type="button">🔄 Play Again</button>
+          <button class="btn btn-secondary" id="btn-choose-song" type="button">🎵 Choose Another Song</button>
+          <button class="btn btn-soft" id="btn-complete-free" type="button">🎹 Free Play</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/songs.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/piano.js"></script>
+  <script src="js/celebration.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
